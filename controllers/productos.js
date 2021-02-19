@@ -30,7 +30,8 @@ const obtenerProducto = async (req, res = response) => {
 
 const crearProducto = async (req, res = response) => {
   const { estado, usuario, ...body } = req.body;
-  const productoDB = await Producto.findOne({ nombre: body.nombre });
+  const nombre = body.nombre.toUpperCase();
+  const productoDB = await Producto.findOne({ nombre });
 
   if (productoDB) {
     return res.status(400).json({
@@ -41,7 +42,7 @@ const crearProducto = async (req, res = response) => {
   //Generar la data a guardar
   const data = {
     ...body,
-    nombre: body.nombre.toUpperCase(),
+    nombre,
     usuario: req.usuario._id,
   };
 
