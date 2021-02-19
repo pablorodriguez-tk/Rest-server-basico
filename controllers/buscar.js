@@ -32,9 +32,7 @@ const buscarCategorias = async (termino = "", res = response) => {
 
   const regex = new RegExp(termino, "i"); //Quita CaseSensitive
 
-  const categorias = await Categoria.find({
-    $and: [{ nombre: regex }, { estado: true }],
-  });
+  const categorias = await Categoria.find({ nombre: regex, estado: true });
 
   res.json({ results: categorias });
 };
