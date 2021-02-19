@@ -51,10 +51,10 @@ const buscarProductos = async (termino = "", res = response) => {
   }
 
   const regex = new RegExp(termino, "i"); //Quita CaseSensitive
-
   const productos = await Producto.find({
-    $and: [{ nombre: regex }, { estado: true }].populate("categoria", "nombre"),
-  });
+    nombre: regex,
+    estado: true,
+  }).populate("categoria", "nombre");
 
   res.json({ results: productos });
 };
