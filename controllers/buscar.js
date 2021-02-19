@@ -43,7 +43,7 @@ const buscarProductos = async (termino = "", res = response) => {
   const esMongoID = ObjectId.isValid(termino); //TRUE
 
   if (esMongoID) {
-    const producto = await (await Producto.findById(termino)).populate(
+    const producto = await Producto.findById(termino).populate(
       "categoria",
       "nombre"
     );
